@@ -1,0 +1,76 @@
+{% load static %}
+
+<section id="contact" class="section-padding bg-gray">    
+  <div class="container">
+    <div class="section-header text-center">          
+      <h2 class="section-title wow fadeInDown" data-wow-delay="0.3s">Contact Us</h2>
+      <div class="shape wow fadeInDown" data-wow-delay="0.3s"></div>
+    </div>
+
+    <!-- Mensagens de sucesso -->
+    {% if messages %}
+      <div class="alert alert-success">
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div class="row contact-form-area wow fadeInUp" data-wow-delay="0.3s">   
+      <div class="col-lg-7 col-md-12 col-sm-12">
+        <div class="contact-block">
+          <form method="POST" action="{% url 'index' %}">
+            {% csrf_token %}
+            <div class="row">
+              <!-- Nome -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input type="text" name="nome" id="nome" class="form-control" placeholder="Nome" value="{{ form.nome.value|default_if_none:'' }}" required>
+                  {% if form.nome.errors %}
+                    <div class="error">{{ form.nome.errors }}</div>
+                  {% endif %}
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input type="email" name="email" id="email" class="form-control" placeholder="Email" value="{{ form.email.value|default_if_none:'' }}" required>
+                  {% if form.email.errors %}
+                    <div class="error">{{ form.email.errors }}</div>
+                  {% endif %}
+                </div> 
+              </div>
+
+              <!-- Assunto -->
+              <div class="col-md-12">
+                <div class="form-group">
+                  <input type="text" name="assunto" id="assunto" class="form-control" placeholder="Assunto" value="{{ form.assunto.value|default_if_none:'' }}" required>
+                  {% if form.assunto.errors %}
+                    <div class="error">{{ form.assunto.errors }}</div>
+                  {% endif %}
+                </div>
+              </div>
+
+              <!-- Mensagem -->
+              <div class="col-md-12">
+                <div class="form-group"> 
+                  <textarea name="mensagem" id="mensagem" class="form-control" placeholder="Sua mensagem" rows="7" required>{{ form.mensagem.value|default_if_none:'' }}</textarea>
+                  {% if form.mensagem.errors %}
+                    <div class="error">{{ form.mensagem.errors }}</div>
+                  {% endif %}
+                </div>
+              </div>
+
+              <!-- Botão de envio -->
+              <div class="submit-button text-left">
+                <button type="submit" class="btn btn-common">Enviar Mensagem</button>
+              </div>
+            </div>            
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div> 
+</section>

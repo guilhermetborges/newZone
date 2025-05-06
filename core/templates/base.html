@@ -1,0 +1,98 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>nuzon</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Icon -->
+    <link rel="stylesheet" href="{% static 'fonts/line-icons.css' %}">
+    <!-- Owl carousel -->
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.css' %}">
+    
+    <!-- Animate -->
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <!-- Main Style -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+
+  </head>
+  <body>
+
+    <!-- Header Area wrapper Starts -->
+    <header id="header-wrap">
+      <!-- Navbar Start -->
+      <nav class="bg-blue-900 fixed-top w-full z-10 shadow-lg">
+        <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+          <!-- Brand -->
+          <a href="{% url 'index' %}" class="navbar-brand" style="width: 100px; height: 40px; text-align: center; margin-top: 20px;">
+            NewZone
+          </a>
+          
+          <!-- Navbar toggle for mobile -->
+          <button class="lg:hidden text-white focus:outline-none" id="navbarToggle">
+            <i class="lni-menu text-2xl"></i>
+          </button>
+          
+          <!-- Navbar items -->
+          <div class="hidden lg:flex w-full justify-end space-x-8">
+            <ul class="flex space-x-6">
+              <li><a class="text-white hover:text-yellow-400" href="#hero-area">Home</a></li>
+              <li><a class="text-white hover:text-yellow-400" href="#services">Serviços</a></li>
+              <li><a class="text-white hover:text-yellow-400" href="#contact">Contato</a></li>
+
+              {% if user.is_authenticated %}
+                <li>
+                  <form method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="text-white hover:text-yellow-400 focus:outline-none">Sair</button>
+                  </form>
+                </li>
+              {% else %}
+                <li><a class="text-white hover:text-yellow-400" href="{% url 'login' %}">Login</a></li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- Navbar End -->
+
+      {% block content %}
+      {% endblock %}
+      
+      <!-- Go to Top Link -->
+      <a href="#" class="back-to-top absolute bottom-10 right-5 text-white text-3xl hover:text-yellow-400">
+        <i class="lni-arrow-up"></i>
+      </a>
+      
+      <!-- Preloader -->
+      <div id="preloader" class="fixed inset-0 flex items-center justify-center bg-white bg-opacity-50 z-20">
+        <div class="loader" id="loader-1"></div>
+      </div>
+      <!-- End Preloader -->
+    </header>
+    
+    <!-- jQuery and other JS -->
+    <script src="{% static 'js/jquery-min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/wow.js' %}"></script>
+    <script src="{% static 'js/jquery.nav.js' %}"></script>
+    <script src="{% static 'js/scrolling-nav.js' %}"></script>
+    <script src="{% static 'js/jquery.easing.min.js' %}"></script>  
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/form-validator.min.js' %}"></script>
+    <script src="{% static 'js/contact-form-script.min.js' %}"></script>
+
+  </body>
+</html>

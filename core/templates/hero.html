@@ -1,0 +1,42 @@
+{% load static %}
+
+<head>
+  <style>
+    #hero-area {
+      background-image: none !important;
+      background-color: #ffffff !important;
+    }
+  </style>
+</head>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<section id="hero-area" class="bg-white pt-3 pb-4" style="padding-top: 60px;">
+  <div class="container mx-auto px-1">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-5">
+      
+      <!-- Texto -->
+      <div class="w-full md:w-1/2 text-center md:text-left">
+        <h2 class="text-3xl md:text-4xl font-bold text-blue-800 leading-tight mb-5">
+          Descubra os Caminhos para Imigrar Legalmente
+        </h2>
+        <p class="text-blue-900 text-base md:text-lg mb-6">
+          Oferecemos informações personalizadas sobre imigração para diversos países. Saiba quais são os requisitos, etapas, documentos e oportunidades disponíveis para o seu perfil.
+        </p>
+      </div>
+
+       <!-- Imagem + Botão -->
+       <div class="w-full md:w-1/2 flex flex-col items-center gap-6">
+        <div class="flex flex-col items-center">
+          <img src="{% static 'img/logohero.png' %}" alt="Imagem ilustrativa sobre imigração" class="object-contain mb-4" style="height: 400px; width: auto;">
+        </div>
+        <div>
+            <a href="{% url 'listar_paises' %}" 
+            class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-xl shadow-lg transition transform hover:scale-105 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex items-center justify-center"
+            style="height: 70px; width: 300px; text-align: center;">
+            Países Disponíveis
+            </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

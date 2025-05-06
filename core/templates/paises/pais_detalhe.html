@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ pais.nome }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-6">
+    <div class="max-w-5xl mx-auto bg-white p-8 rounded-lg shadow-md">
+        <h1 class="text-3xl font-bold mb-4">{{ pais.nome }}</h1>
+        <img src="{{ pais.imagem.normal.url }}" alt="Imagem de {{ pais.nome }}"  style="width: 300px; height: auto;  padding: 10px; ">
+        <p class="text-gray-700 mb-6">{{ pais.descricao }}</p>
+
+        <h2 class="text-2xl font-semibold mb-4">Cidades:</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {% for cidade in cidade %}
+            <div class="bg-gray-50 p-4 rounded-lg shadow">
+                <h3 class="text-xl font-bold">{{ cidade.nome }}</h3>
+                {% if cidade.imagemCdd %}
+                    <img src="{{ cidade.imagemCdd.url }}" alt="{{ cidade.nome }}" class="w-full h-40 object-cover rounded mt-2">
+                {% endif %}
+                <p class="text-sm text-black-900">População: {{ cidade.populacao }}</p>
+                <p class="text-sm text-gray-900">IDH: {{ cidade.idh }}</p>
+                <a href="{% url 'cidades' cidade.slug %}"  
+                    class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 my-4 block text-center">
+                    ver detalhes
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="mt-6">
+            <a href="{% url 'listar_paises' %}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-lg transition">
+                Voltar à lista de países
+            </a>
+        </div>
+    </div>
+</body>
+</html>
+
