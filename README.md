@@ -9,6 +9,9 @@ O site consiste em:
 - Adicionar países com informações relevantes
 - Exibir dados básicos sobre imigração para esses países
 - Apresentar essas informações de forma visual e organizada
+-  Sistema de login/admin
+- Filtros por continente ou nível de exigência para imigração
+- todos testes realizados com coverage
 
 > O foco é mais funcional do que visual, servindo como base para projetos futuros e para aprendizado.
 
@@ -27,10 +30,7 @@ O site consiste em:
 
 ## 🚧 Status
 
-Em desenvolvimento. trambem inclui:
-
-- Sistema de login/admin
-- Filtros por continente ou nível de exigência para imigração
+Em desenvolvimento. 
 
 ## 📷 Capturas de Tela
 
