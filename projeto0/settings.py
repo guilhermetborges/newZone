@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -76,9 +77,13 @@ WSGI_APPLICATION = 'projeto0.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+
+
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'), conn_max_age=600),
 }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -115,7 +120,7 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 STATICFILES_DIRS = [BASE_DIR / 'core' / 'static']
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
@@ -128,6 +133,8 @@ LOGOUT_REDIRECT_URL = 'logout'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

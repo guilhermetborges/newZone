@@ -26,6 +26,9 @@ urlpatterns = [
     path('', include('core.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 admin.site.site_header = 'new zone'
 admin.site.site_title = "realize seu sonho"
 admin.site.index_title = 'sistema de administração new zone'
