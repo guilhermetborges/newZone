@@ -143,4 +143,7 @@ CSRF_COOKIE_HTTPONLY = True
 
 #SECURE_SSL_REDIRECT = True
 
-CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'https://web-production-7fc4.up.railway.app/']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'https://web-production-7fc4.up.railway.app']
+
+CSRF_COOKIE_SECURE = True  # Certo se estiver usando HTTPS
+SESSION_COOKIE_SECURE = True
