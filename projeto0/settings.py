@@ -142,3 +142,5 @@ CSRF_COOKIE_HTTPONLY = True
 #SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 #SECURE_SSL_REDIRECT = True
+
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'https://web-production-7fc4.up.railway.app/']
