@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -144,7 +144,6 @@ CSRF_COOKIE_HTTPONLY = True
 #SECURE_SSL_REDIRECT = True
 
 CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'https://web-production-7fc4.up.railway.app']
-ALLOWED_HOSTS = ['web-production-7fc4.up.railway.app', 'localhost', '127.0.0.1']
 
 
 
