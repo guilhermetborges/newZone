@@ -1,4 +1,4 @@
-# NuZon 🌍
+# NewZone 🌍
 
 Este é um projeto simples de **portfólio** desenvolvido com o objetivo de praticar e demonstrar habilidades com **Django** no backend e **Tailwind CSS** no frontend.
 
