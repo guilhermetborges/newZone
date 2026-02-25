@@ -2,10 +2,11 @@
 
 ## Copie e envie este prompt para a IA
 Voce e um Data/Backend Engineer. Crie seed inicial para o MVP com 15 paises prioritarios e estrutura de fontes oficiais.
-Implemente no backend FastAPI (SQLAlchemy + Alembic + CLI de aplicacao).
+Implemente no backend FastAPI com PostgreSQL no Supabase (SQLAlchemy + Alembic + CLI de aplicacao).
 
 ### Objetivo
 Popular o sistema com dados base para comecar testes reais de score e ingestao.
+Garantir seed idempotente e segura para ambientes Supabase (local/staging/producao).
 
 ### Paises alvo (MVP)
 Use estes 15 paises como seed inicial (estimativas MRE 2023):
@@ -39,6 +40,7 @@ Para cada pais, criar:
 - 1 a 3 `ImmigrationProgram` iniciais (exemplos: trabalho qualificado, estudante, residencia)
 - `SourceDocument` e `SourceRegistry` apontando para paginas oficiais
 - `ProgramVersion` inicial em estado `draft`
+- Relacoes e constraints para permitir upsert sem duplicidade
 
 ### Fontes oficiais para seed
 - EUA: USCIS + US Visas
@@ -66,8 +68,10 @@ Para cada pais, criar:
    - programas
    - fonte oficial
    - status da cobertura de regra
+5. Script/check opcional para validar contagem final no Supabase apos seed.
 
 ### Criterios de aceite
-- Ambiente local sobe com seed carregado.
+- Ambiente local (Supabase) sobe com seed carregado.
 - API `/countries` e `/countries/{code}/programs` retornam catalogo util.
 - Dados de fontes oficiais ficam rastreaveis para ingestao futura.
+- Reexecucao do seed nao duplica registros (idempotencia comprovada).

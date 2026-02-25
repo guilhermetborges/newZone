@@ -2,15 +2,15 @@
 
 ## Copie e envie este prompt para a IA
 Voce e um Data Engineer Senior. Implemente pipeline de coleta e normalizacao de regras de imigracao para alimentar o backend sem hardcode.
-Integre com o backend FastAPI usando SQLAlchemy/Alembic e jobs Celery.
+Integre com o backend FastAPI usando PostgreSQL no Supabase (via SQLAlchemy/Alembic) e jobs Celery.
 
 ### Objetivo
 Construir pipeline confiavel para coletar, versionar e publicar regras oficiais por pais/programa com trilha de auditoria.
 
 ### Arquitetura de dados obrigatoria
-- Bronze: documento bruto (HTML/PDF/JSON) + metadados + hash
+- Bronze: documento bruto (HTML/PDF/JSON) em Supabase Storage + metadados + hash
 - Silver: texto limpo e segmentado por secao/artigo
-- Gold: regras normalizadas (`ProgramVersion`, `RuleCondition`, `RuleOutcome`)
+- Gold: regras normalizadas em tabelas PostgreSQL do Supabase (`ProgramVersion`, `RuleCondition`, `RuleOutcome`)
 
 ### Componentes obrigatorios
 1. `SourceRegistry` (cadastro de fontes)
@@ -22,13 +22,16 @@ Construir pipeline confiavel para coletar, versionar e publicar regras oficiais 
 4. `Validator` (schema com Pydantic)
 5. `Publisher` (grava nova `ProgramVersion` sem sobrescrever historico)
 6. `Diff Engine` (detecta mudancas por hash + diff semantico)
+7. `SupabaseDataGateway` para persistencia e leitura (pool de conexao, retries e transacao)
 
-### Policas obrigatorias
+### Politicas obrigatorias
 - Respeitar `robots.txt` e termos de uso.
 - Agendamento com Celery Beat.
 - Retry com backoff e quarentena para fontes problematicas.
 - Nao publicar automaticamente quando confianca < threshold.
 - Exigir `manual_review_required=true` para casos ambiguos.
+- Usar chave `service_role` apenas no backend/workers (nunca no frontend).
+- Aplicar RLS nas tabelas expostas ao app e isolar tabelas internas de ingestao.
 
 ### Fontes publicas iniciais (MVP)
 Use estas fontes oficiais como `seed` no `SourceRegistry`:
@@ -87,8 +90,9 @@ Use estas fontes oficiais como `seed` no `SourceRegistry`:
 - Estrategia de versionamento de regra ativando novas versoes sem apagar antigas.
 - CLI/endpoint interno protegido para reprocessar uma fonte especifica.
 - Testes de parser para ao menos 5 fontes na primeira entrega.
+- Migracoes Alembic compativeis com Supabase (sem perder historico).
 
 ### Criterios de aceite
-- Pipeline executa ponta a ponta em ambiente local.
+- Pipeline executa ponta a ponta em ambiente local com Supabase (local ou cloud).
 - Mudanca na fonte gera nova versao de regra (quando aplicavel).
 - Auditoria responde: origem, quando coletado, parser usado, confianca, diff.

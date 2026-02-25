@@ -9,7 +9,7 @@ Garantir entrega continua com confianca em regressao minima.
 ### Testes obrigatorios
 - Backend
   - unitarios (engine de score)
-  - integracao (API + DB)
+  - integracao (API + PostgreSQL no Supabase)
   - contrato (OpenAPI)
   - tasks Celery
 - Frontend
@@ -24,19 +24,22 @@ Garantir entrega continua com confianca em regressao minima.
 - Testes frontend
 - Build de imagens Docker
 - Bloquear merge se pipeline falhar
+- Subir Supabase local (ou Postgres equivalente compativel) no pipeline para testes de integracao
 
 ### CD (MVP)
 - Deploy em staging automatico na branch principal
 - Deploy em producao manual com aprovacao
-- Revisoes Alembic executadas de forma segura
+- Revisoes Alembic executadas de forma segura no Supabase (staging antes de producao)
 
 ### Entregaveis obrigatorios
 1. Pipeline CI em arquivo versionado (`.github/workflows/...` ou equivalente).
 2. Estrategia de rollback documentada.
 3. Checklist de release (`docs/release-checklist.md`).
 4. Seed inicial e smoke tests pos-deploy.
+5. Passo de migracao/validacao para projeto Supabase de staging e producao.
 
 ### Criterios de aceite
 - PR so mergeia com testes verdes.
 - Ambiente staging reproduzivel.
 - Release com rollback claro em menos de 15 min.
+- Migracoes e seed executam sem ajuste manual no Supabase de staging.
